@@ -9,28 +9,31 @@
 <ion-content [fullscreen]="true">
     <ion-card>
         <ion-card-header>
-            <ion-card-subtitle></ion-card-subtitle>
-            <ion-card-title>Let's get in touch</ion-card-title>
+            <ion-card-subtitle>Subtitle</ion-card-subtitle>
+            <ion-card-title>Title</ion-card-title>
         </ion-card-header>
-
         <ion-card-content>
-            If you would like to contact me and discuss things in more detail, feel free to use the form below to
-            send me a message.
-            <ion-list>
-                <ion-item>
+            Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem. Nulla quis lorem ut libero malesuada
+            feugiat.
+            <form [formGroup]="form" (ngSubmit)="submit()">
+                <ion-item [class.submitted]="submitted">
                     <ion-label position="floating">Name</ion-label>
-                    <ion-input></ion-input>
+                    <ion-input formControlName="name" [class.submitted]="submitted" [readonly]="submitted"></ion-input>
                 </ion-item>
-                <ion-item>
+                <ion-item [class.submitted]="submitted">
                     <ion-label position="floating">Email</ion-label>
-                    <ion-input></ion-input>
+                    <ion-input formControlName="email" [class.submitted]="submitted"
+                               [readonly]="submitted"></ion-input>
                 </ion-item>
-                <ion-item>
+                <ion-item [class.submitted]="submitted">
                     <ion-label position="floating">Message</ion-label>
-                    <ion-textarea rows="5"></ion-textarea>
+                    <ion-textarea rows="5" formControlName="message" [readonly]="submitted"></ion-textarea>
                 </ion-item>
-            </ion-list>
-            <ion-button expand="block">Send message</ion-button>
+                <ion-button type="submit" expand="block" [disabled]="!form.valid">
+                    <span *ngIf="!submitted">Send message</span>
+                    <span *ngIf="submitted">Message has been sent</span>
+                </ion-button>
+            </form>
         </ion-card-content>
     </ion-card>
 </ion-content>
